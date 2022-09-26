@@ -120,12 +120,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -154,6 +154,84 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.soartseng.com/2022/09/26/kubectl-command/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Soar Tseng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Soar's Notes">
+      <meta itemprop="description" content="Diary & Learning Notes">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Soar's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/26/kubectl-command/" class="post-title-link" itemprop="url">kubectl command</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-09-26 13:50:18 / Modified: 13:55:55" itemprop="dateCreated datePublished" datetime="2022-09-26T13:50:18+08:00">2022-09-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="kubectl-x2F-container相關筆記-持續更新中"><a href="#kubectl-x2F-container相關筆記-持續更新中" class="headerlink" title="kubectl&#x2F;container相關筆記 (持續更新中)"></a>kubectl&#x2F;container相關筆記 (持續更新中)</h2><h3 id="Check-Cluster-Version"><a href="#Check-Cluster-Version" class="headerlink" title="Check Cluster Version"></a>Check Cluster Version</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl version</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="列出pod環境變數"><a href="#列出pod環境變數" class="headerlink" title="列出pod環境變數"></a>列出pod環境變數</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl exec &lt;pod-name&gt; -- printenv</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="debug-image-for-kubernets’-container"><a href="#debug-image-for-kubernets’-container" class="headerlink" title="debug image for kubernets’ container"></a>debug image for kubernets’ container</h3><ul>
+<li>add below in yaml file.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command: [&quot;tail&quot;, &quot;-f&quot;, &quot;/dev/null&quot;]</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
