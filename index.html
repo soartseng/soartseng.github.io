@@ -201,7 +201,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-09-27 17:11:36 / Modified: 17:14:05" itemprop="dateCreated datePublished" datetime="2022-09-27T17:11:36+08:00">2022-09-27</time>
+      <time title="Created: 2022-09-27 17:11:36 / Modified: 17:16:55" itemprop="dateCreated datePublished" datetime="2022-09-27T17:11:36+08:00">2022-09-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -226,31 +226,14 @@
           <h3 id="查看db-list"><a href="#查看db-list" class="headerlink" title="查看db list"></a>查看db list</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -U &lt;username&gt; -l</span><br></pre></td></tr></table></figure>
 
 <h3 id="查看db的user-list"><a href="#查看db的user-list" class="headerlink" title="查看db的user list"></a>查看db的user list</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -d &lt;db_name&gt; -U &lt;username&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="連線其中一個db"><a href="#連線其中一個db" class="headerlink" title="連線其中一個db"></a>連線其中一個db</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -d &lt;db_name&gt; -U &lt;username&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="查看有哪些table"><a href="#查看有哪些table" class="headerlink" title="查看有哪些table"></a>查看有哪些table</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from pg_tables;</span><br></pre></td></tr></table></figure>
-
-<h3 id="查看schemaname為public的tables"><a href="#查看schemaname為public的tables" class="headerlink" title="查看schemaname為public的tables"></a>查看schemaname為public的tables</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT tablename FROM pg_tables WHERE schemaname=&#x27;public&#x27;;</span><br></pre></td></tr></table></figure>
-
-<p>or</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\dt</span><br></pre></td></tr></table></figure>
-
-<h3 id="查看特定表之結構-amp-特定表有哪些欄位"><a href="#查看特定表之結構-amp-特定表有哪些欄位" class="headerlink" title="查看特定表之結構 &amp; 特定表有哪些欄位"></a>查看特定表之結構 &amp; 特定表有哪些欄位</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d &quot;&lt;tablename&gt;&quot;</span><br></pre></td></tr></table></figure>
-<p>請注意，如果tablename有大小寫，前後要加上雙引號。</p>
-<h3 id="查看table中的某個欄位內容"><a href="#查看table中的某個欄位內容" class="headerlink" title="查看table中的某個欄位內容"></a>查看table中的某個欄位內容</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;欄位名稱&gt; FROM &lt;tablename&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>Backup script on kubernetes:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; exec -it &lt;pg-pod-name&gt; -- bash -c &quot;pg_dump -U [postgres-user] [data-base-name]&quot; &gt; database.dump</span><br></pre></td></tr></table></figure>
-
-<p>Restore script on kubernetes:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; cp &lt;proj. name&gt;.dump &lt;pg-pod-name&gt;:/&lt;proj. name&gt;.dump</span><br><span class="line">kubectl -n &lt;namespace&gt; exec -it &lt;pg-pod-name&gt; -- bash -c &quot;psql -d &lt;proj. name&gt; -U &lt;username&gt; -f &lt;proj. name&gt;.dump </span><br></pre></td></tr></table></figure>
-
-<h4 id="dumpall-for-Backup-script-on-kubernetes"><a href="#dumpall-for-Backup-script-on-kubernetes" class="headerlink" title="dumpall for Backup script on kubernetes:"></a>dumpall for Backup script on kubernetes:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; exec -it &lt;pg-pod-name&gt; -- bash -c &quot;pg_dumpall -U [postgres-user]&quot; &gt; pg_alldb.sql</span><br></pre></td></tr></table></figure>
-
-<h4 id="dumpall-for-Restore-script-on-kubernetes"><a href="#dumpall-for-Restore-script-on-kubernetes" class="headerlink" title="dumpall for Restore script on kubernetes:"></a>dumpall for Restore script on kubernetes:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; cp pg_alldb.sql &lt;pg-pod-name&gt;:/pg_alldb.sql</span><br><span class="line">psql -d tpsystem -U &lt;username&gt; &lt; pg_alldb.sql</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/09/27/PostgreSQL%E7%9B%B8%E9%97%9C%E7%AD%86%E8%A8%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
