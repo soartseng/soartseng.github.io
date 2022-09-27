@@ -122,18 +122,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -162,6 +162,111 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.soartseng.com/2022/09/27/PostgreSQL%E7%9B%B8%E9%97%9C%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Soar Tseng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Soar's Notes">
+      <meta itemprop="description" content="Diary & Learning Notes">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Soar's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/27/PostgreSQL%E7%9B%B8%E9%97%9C%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">PostgreSQL相關筆記</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-09-27 17:11:36 / Modified: 17:14:05" itemprop="dateCreated datePublished" datetime="2022-09-27T17:11:36+08:00">2022-09-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/PostgreSQL/" itemprop="url" rel="index"><span itemprop="name">PostgreSQL</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="查看db-list"><a href="#查看db-list" class="headerlink" title="查看db list"></a>查看db list</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -U &lt;username&gt; -l</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看db的user-list"><a href="#查看db的user-list" class="headerlink" title="查看db的user list"></a>查看db的user list</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -d &lt;db_name&gt; -U &lt;username&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="連線其中一個db"><a href="#連線其中一個db" class="headerlink" title="連線其中一個db"></a>連線其中一個db</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -d &lt;db_name&gt; -U &lt;username&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看有哪些table"><a href="#查看有哪些table" class="headerlink" title="查看有哪些table"></a>查看有哪些table</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from pg_tables;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看schemaname為public的tables"><a href="#查看schemaname為public的tables" class="headerlink" title="查看schemaname為public的tables"></a>查看schemaname為public的tables</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT tablename FROM pg_tables WHERE schemaname=&#x27;public&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\dt</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看特定表之結構-amp-特定表有哪些欄位"><a href="#查看特定表之結構-amp-特定表有哪些欄位" class="headerlink" title="查看特定表之結構 &amp; 特定表有哪些欄位"></a>查看特定表之結構 &amp; 特定表有哪些欄位</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d &quot;&lt;tablename&gt;&quot;</span><br></pre></td></tr></table></figure>
+<p>請注意，如果tablename有大小寫，前後要加上雙引號。</p>
+<h3 id="查看table中的某個欄位內容"><a href="#查看table中的某個欄位內容" class="headerlink" title="查看table中的某個欄位內容"></a>查看table中的某個欄位內容</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;欄位名稱&gt; FROM &lt;tablename&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>Backup script on kubernetes:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; exec -it &lt;pg-pod-name&gt; -- bash -c &quot;pg_dump -U [postgres-user] [data-base-name]&quot; &gt; database.dump</span><br></pre></td></tr></table></figure>
+
+<p>Restore script on kubernetes:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; cp &lt;proj. name&gt;.dump &lt;pg-pod-name&gt;:/&lt;proj. name&gt;.dump</span><br><span class="line">kubectl -n &lt;namespace&gt; exec -it &lt;pg-pod-name&gt; -- bash -c &quot;psql -d &lt;proj. name&gt; -U &lt;username&gt; -f &lt;proj. name&gt;.dump </span><br></pre></td></tr></table></figure>
+
+<h4 id="dumpall-for-Backup-script-on-kubernetes"><a href="#dumpall-for-Backup-script-on-kubernetes" class="headerlink" title="dumpall for Backup script on kubernetes:"></a>dumpall for Backup script on kubernetes:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; exec -it &lt;pg-pod-name&gt; -- bash -c &quot;pg_dumpall -U [postgres-user]&quot; &gt; pg_alldb.sql</span><br></pre></td></tr></table></figure>
+
+<h4 id="dumpall-for-Restore-script-on-kubernetes"><a href="#dumpall-for-Restore-script-on-kubernetes" class="headerlink" title="dumpall for Restore script on kubernetes:"></a>dumpall for Restore script on kubernetes:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; cp pg_alldb.sql &lt;pg-pod-name&gt;:/pg_alldb.sql</span><br><span class="line">psql -d tpsystem -U &lt;username&gt; &lt; pg_alldb.sql</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

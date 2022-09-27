@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="mask-icon" href="/logo.png" color="#222">
+  <link rel="manifest" href="/site.webmanifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.soartseng.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="查看db list1psql -U &lt;username&gt; -l  查看db的user list1psql -d &lt;db_name&gt; -U &lt;username&gt;   連線其中一個db1psql -d &lt;db_name&gt; -U &lt;username&gt;  查看有哪些table1select * from pg_tables;  查看scheman">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PostgreSQL相關筆記">
+<meta property="og:url" content="https://www.soartseng.com/2022/09/27/PostgreSQL%E7%9B%B8%E9%97%9C%E7%AD%86%E8%A8%98/index.html">
+<meta property="og:site_name" content="Soar&#39;s Notes">
+<meta property="og:description" content="查看db list1psql -U &lt;username&gt; -l  查看db的user list1psql -d &lt;db_name&gt; -U &lt;username&gt;   連線其中一個db1psql -d &lt;db_name&gt; -U &lt;username&gt;  查看有哪些table1select * from pg_tables;  查看scheman">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-27T09:11:36.000Z">
+<meta property="article:modified_time" content="2022-09-27T09:14:05.625Z">
+<meta property="article:author" content="Soar Tseng">
+<meta property="article:tag" content="PostgreSQL">
+<meta property="article:tag" content="Kubernetes">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.soartseng.com/2022/09/27/PostgreSQL%E7%9B%B8%E9%97%9C%E7%AD%86%E8%A8%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.soartseng.com/2022/09/27/PostgreSQL%E7%9B%B8%E9%97%9C%E7%AD%86%E8%A8%98/","path":"2022/09/27/PostgreSQL相關筆記/","title":"PostgreSQL相關筆記"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>PostgreSQL相關筆記 | Soar's Notes</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Soar's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/logo.png" alt="Soar's Notes">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bdb-list"><span class="nav-number">1.</span> <span class="nav-text">查看db list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bdb%E7%9A%84user-list"><span class="nav-number">2.</span> <span class="nav-text">查看db的user list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%A3%E7%B7%9A%E5%85%B6%E4%B8%AD%E4%B8%80%E5%80%8Bdb"><span class="nav-number">3.</span> <span class="nav-text">連線其中一個db</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%89%E5%93%AA%E4%BA%9Btable"><span class="nav-number">4.</span> <span class="nav-text">查看有哪些table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bschemaname%E7%82%BApublic%E7%9A%84tables"><span class="nav-number">5.</span> <span class="nav-text">查看schemaname為public的tables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%89%B9%E5%AE%9A%E8%A1%A8%E4%B9%8B%E7%B5%90%E6%A7%8B-amp-%E7%89%B9%E5%AE%9A%E8%A1%A8%E6%9C%89%E5%93%AA%E4%BA%9B%E6%AC%84%E4%BD%8D"><span class="nav-number">6.</span> <span class="nav-text">查看特定表之結構 &amp; 特定表有哪些欄位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Btable%E4%B8%AD%E7%9A%84%E6%9F%90%E5%80%8B%E6%AC%84%E4%BD%8D%E5%85%A7%E5%AE%B9"><span class="nav-number">7.</span> <span class="nav-text">查看table中的某個欄位內容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dumpall-for-Backup-script-on-kubernetes"><span class="nav-number">7.1.</span> <span class="nav-text">dumpall for Backup script on kubernetes:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dumpall-for-Restore-script-on-kubernetes"><span class="nav-number">7.2.</span> <span class="nav-text">dumpall for Restore script on kubernetes:</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Soar Tseng</p>
+  <div class="site-description" itemprop="description">Diary & Learning Notes</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.soartseng.com/2022/09/27/PostgreSQL%E7%9B%B8%E9%97%9C%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Soar Tseng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Soar's Notes">
+      <meta itemprop="description" content="Diary & Learning Notes">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="PostgreSQL相關筆記 | Soar's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PostgreSQL相關筆記
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-09-27 17:11:36 / Modified: 17:14:05" itemprop="dateCreated datePublished" datetime="2022-09-27T17:11:36+08:00">2022-09-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/PostgreSQL/" itemprop="url" rel="index"><span itemprop="name">PostgreSQL</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="查看db-list"><a href="#查看db-list" class="headerlink" title="查看db list"></a>查看db list</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -U &lt;username&gt; -l</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看db的user-list"><a href="#查看db的user-list" class="headerlink" title="查看db的user list"></a>查看db的user list</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -d &lt;db_name&gt; -U &lt;username&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="連線其中一個db"><a href="#連線其中一個db" class="headerlink" title="連線其中一個db"></a>連線其中一個db</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -d &lt;db_name&gt; -U &lt;username&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看有哪些table"><a href="#查看有哪些table" class="headerlink" title="查看有哪些table"></a>查看有哪些table</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from pg_tables;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看schemaname為public的tables"><a href="#查看schemaname為public的tables" class="headerlink" title="查看schemaname為public的tables"></a>查看schemaname為public的tables</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT tablename FROM pg_tables WHERE schemaname=&#x27;public&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\dt</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看特定表之結構-amp-特定表有哪些欄位"><a href="#查看特定表之結構-amp-特定表有哪些欄位" class="headerlink" title="查看特定表之結構 &amp; 特定表有哪些欄位"></a>查看特定表之結構 &amp; 特定表有哪些欄位</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d &quot;&lt;tablename&gt;&quot;</span><br></pre></td></tr></table></figure>
+<p>請注意，如果tablename有大小寫，前後要加上雙引號。</p>
+<h3 id="查看table中的某個欄位內容"><a href="#查看table中的某個欄位內容" class="headerlink" title="查看table中的某個欄位內容"></a>查看table中的某個欄位內容</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT &lt;欄位名稱&gt; FROM &lt;tablename&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>Backup script on kubernetes:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; exec -it &lt;pg-pod-name&gt; -- bash -c &quot;pg_dump -U [postgres-user] [data-base-name]&quot; &gt; database.dump</span><br></pre></td></tr></table></figure>
+
+<p>Restore script on kubernetes:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; cp &lt;proj. name&gt;.dump &lt;pg-pod-name&gt;:/&lt;proj. name&gt;.dump</span><br><span class="line">kubectl -n &lt;namespace&gt; exec -it &lt;pg-pod-name&gt; -- bash -c &quot;psql -d &lt;proj. name&gt; -U &lt;username&gt; -f &lt;proj. name&gt;.dump </span><br></pre></td></tr></table></figure>
+
+<h4 id="dumpall-for-Backup-script-on-kubernetes"><a href="#dumpall-for-Backup-script-on-kubernetes" class="headerlink" title="dumpall for Backup script on kubernetes:"></a>dumpall for Backup script on kubernetes:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; exec -it &lt;pg-pod-name&gt; -- bash -c &quot;pg_dumpall -U [postgres-user]&quot; &gt; pg_alldb.sql</span><br></pre></td></tr></table></figure>
+
+<h4 id="dumpall-for-Restore-script-on-kubernetes"><a href="#dumpall-for-Restore-script-on-kubernetes" class="headerlink" title="dumpall for Restore script on kubernetes:"></a>dumpall for Restore script on kubernetes:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n &lt;namespace&gt; cp pg_alldb.sql &lt;pg-pod-name&gt;:/pg_alldb.sql</span><br><span class="line">psql -d tpsystem -U &lt;username&gt; &lt; pg_alldb.sql</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PostgreSQL/" rel="tag"># PostgreSQL</a>
+              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/09/27/2022-09-27-%E9%9D%88%E4%BF%AE%E5%BF%83%E5%BE%97/" rel="prev" title="2022/09/27 靈修心得">
+                  <i class="fa fa-chevron-left"></i> 2022/09/27 靈修心得
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Soar Tseng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
