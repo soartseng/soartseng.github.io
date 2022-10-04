@@ -22,25 +22,30 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.soartseng.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Diary &amp; Learning Notes">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Soar&#39;s Notes">
-<meta property="og:url" content="https://www.soartseng.com/archives/2022/page/2/index.html">
+    <meta name="description" content="Kind相關筆記 (持續更新中)初始一個cluster查詢既有cluster 1kind get clusters">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kind">
+<meta property="og:url" content="https://www.soartseng.com/2022/10/04/kind/index.html">
 <meta property="og:site_name" content="Soar&#39;s Notes">
-<meta property="og:description" content="Diary &amp; Learning Notes">
+<meta property="og:description" content="Kind相關筆記 (持續更新中)初始一個cluster查詢既有cluster 1kind get clusters">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-04T03:02:27.000Z">
+<meta property="article:modified_time" content="2022-10-04T03:05:34.056Z">
 <meta property="article:author" content="Soar Tseng">
+<meta property="article:tag" content="kubectl">
+<meta property="article:tag" content="kubernetes">
+<meta property="article:tag" content="kind">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://www.soartseng.com/archives/2022/page/2/">
+<link rel="canonical" href="https://www.soartseng.com/2022/10/04/kind/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"archives/2022/page/2/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.soartseng.com/2022/10/04/kind/","path":"2022/10/04/kind/","title":"kind"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Archive | Soar's Notes</title>
+<title>kind | Soar's Notes</title>
   
 
 
@@ -68,7 +73,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Soar's Notes</h1>
+      <p class="site-title">Soar's Notes</p>
       <i class="logo-line"></i>
     </a>
       <img class="custom-logo-image" src="/logo.png" alt="Soar's Notes">
@@ -97,7 +102,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -110,6 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kind%E7%9B%B8%E9%97%9C%E7%AD%86%E8%A8%98-%E6%8C%81%E7%BA%8C%E6%9B%B4%E6%96%B0%E4%B8%AD"><span class="nav-number">1.</span> <span class="nav-text">Kind相關筆記 (持續更新中)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E4%B8%80%E5%80%8Bcluster"><span class="nav-number">1.1.</span> <span class="nav-text">初始一個cluster</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,92 +167,107 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 13 posts in total. Keep on posting.</span>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.soartseng.com/2022/10/04/kind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Soar Tseng">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Soar's Notes">
+      <meta itemprop="description" content="Diary & Learning Notes">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="kind | Soar's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          kind
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+
+      <time title="Created: 2022-10-04 11:02:27 / Modified: 11:05:34" itemprop="dateCreated datePublished" datetime="2022-10-04T11:02:27+08:00">2022-10-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/kubernetes/" itemprop="url" rel="index"><span itemprop="name">kubernetes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Kind相關筆記-持續更新中"><a href="#Kind相關筆記-持續更新中" class="headerlink" title="Kind相關筆記 (持續更新中)"></a>Kind相關筆記 (持續更新中)</h2><h3 id="初始一個cluster"><a href="#初始一個cluster" class="headerlink" title="初始一個cluster"></a>初始一個cluster</h3><p>查詢既有cluster</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind get clusters</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+<p>創建一個cluster</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind create cluster --name &lt;kind-&quot;name&quot;&gt;</span><br></pre></td></tr></table></figure>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-09-26T14:42:35+08:00"
-              content="2022-09-26">
-          09-26
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/09/26/Linux%E7%9B%B8%E9%97%9C%E7%AD%86%E8%A8%98/" itemprop="url">
-            <span itemprop="name">Linux相關筆記</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/kubectl/" rel="tag"># kubectl</a>
+              <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+              <a href="/tags/kind/" rel="tag"># kind</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/04/2022-10-04-%E9%9D%88%E4%BF%AE%E5%BF%83%E5%BE%97/" rel="prev" title="2022/10/04 靈修心得">
+                  <i class="fa fa-chevron-left"></i> 2022/10/04 靈修心得
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-09-26T13:50:18+08:00"
-              content="2022-09-26">
-          09-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/09/26/kubectl-command/" itemprop="url">
-            <span itemprop="name">kubectl command</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-09-26T10:03:57+08:00"
-              content="2022-09-26">
-          09-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/09/26/2022-09-26-%E9%9D%88%E4%BF%AE%E5%BF%83%E5%BE%97/" itemprop="url">
-            <span itemprop="name">2022/09/26 靈修心得</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2022/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/2022/">1</a><span class="page-number current">2</span>
-  </nav>
+
+
+
 
 </div>
   </main>
