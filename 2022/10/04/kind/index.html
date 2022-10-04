@@ -30,10 +30,10 @@
 <meta property="og:description" content="Kind相關筆記 (持續更新中)初始一個cluster查詢既有cluster 1kind get clusters">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-10-04T03:02:27.000Z">
-<meta property="article:modified_time" content="2022-10-04T03:05:34.056Z">
+<meta property="article:modified_time" content="2022-10-04T05:35:19.579Z">
 <meta property="article:author" content="Soar Tseng">
-<meta property="article:tag" content="kubectl">
 <meta property="article:tag" content="kubernetes">
+<meta property="article:tag" content="kubectl">
 <meta property="article:tag" content="kind">
 <meta name="twitter:card" content="summary">
 
@@ -115,7 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kind%E7%9B%B8%E9%97%9C%E7%AD%86%E8%A8%98-%E6%8C%81%E7%BA%8C%E6%9B%B4%E6%96%B0%E4%B8%AD"><span class="nav-number">1.</span> <span class="nav-text">Kind相關筆記 (持續更新中)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E4%B8%80%E5%80%8Bcluster"><span class="nav-number">1.1.</span> <span class="nav-text">初始一個cluster</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kind%E7%9B%B8%E9%97%9C%E7%AD%86%E8%A8%98-%E6%8C%81%E7%BA%8C%E6%9B%B4%E6%96%B0%E4%B8%AD"><span class="nav-number">1.</span> <span class="nav-text">Kind相關筆記 (持續更新中)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E4%B8%80%E5%80%8Bcluster"><span class="nav-number">1.1.</span> <span class="nav-text">初始一個cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%B5%E5%BB%BA%E4%B8%80%E5%80%8Bcluster"><span class="nav-number">1.2.</span> <span class="nav-text">創建一個cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%AA%E9%99%A4Cluster"><span class="nav-number">1.3.</span> <span class="nav-text">刪除Cluster</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -208,7 +208,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-10-04 11:02:27 / Modified: 11:05:34" itemprop="dateCreated datePublished" datetime="2022-10-04T11:02:27+08:00">2022-10-04</time>
+      <time title="Created: 2022-10-04 11:02:27 / Modified: 13:35:19" itemprop="dateCreated datePublished" datetime="2022-10-04T11:02:27+08:00">2022-10-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -230,12 +230,34 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Kind相關筆記-持續更新中"><a href="#Kind相關筆記-持續更新中" class="headerlink" title="Kind相關筆記 (持續更新中)"></a>Kind相關筆記 (持續更新中)</h2><h3 id="初始一個cluster"><a href="#初始一個cluster" class="headerlink" title="初始一個cluster"></a>初始一個cluster</h3><p>查詢既有cluster</p>
+        <h1 id="Kind相關筆記-持續更新中"><a href="#Kind相關筆記-持續更新中" class="headerlink" title="Kind相關筆記 (持續更新中)"></a>Kind相關筆記 (持續更新中)</h1><h2 id="初始一個cluster"><a href="#初始一個cluster" class="headerlink" title="初始一個cluster"></a>初始一個cluster</h2><p>查詢既有cluster</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind get clusters</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
-<p>創建一個cluster</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind create cluster --name &lt;kind-&quot;name&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="創建一個cluster"><a href="#創建一個cluster" class="headerlink" title="創建一個cluster"></a><strong>創建一個cluster</strong></h2><p><strong>vanilla:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind create cluster</span><br></pre></td></tr></table></figure>
+<p>若沒指定cluster名稱，預設為kind-kind</p>
+<hr>
+<p><strong>指定cluster名稱:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind create cluster --name &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p>即名稱為kind-&lt;name&gt;。</p>
+<hr>
+<p><strong>新增cluster對外port:</strong></p>
+<p>先新增一個cluster-config.yaml，內容如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">kind: Cluster</span><br><span class="line">apiVersion: kind.x-k8s.io/v1alpha4</span><br><span class="line">networking:</span><br><span class="line">  apiServerAddress: &quot;192.168.56.101&quot;</span><br><span class="line">  apiServerPort: 6443</span><br><span class="line">nodes:</span><br><span class="line">- role: control-plane</span><br><span class="line">  extraMounts:</span><br><span class="line">  - hostPath: /data</span><br><span class="line">    containerPath: /files</span><br><span class="line">    readOnly: true</span><br><span class="line">    selinuxRelabel: false</span><br><span class="line">    propagation: HostToContainer</span><br><span class="line">  extraPortMappings:</span><br><span class="line">  - containerPort: 30000</span><br><span class="line">    hostPort: 30000</span><br><span class="line">  - containerPort: 30070</span><br><span class="line">    hostPort: 30070</span><br><span class="line">  - containerPort: 30071</span><br><span class="line">    hostPort: 30071</span><br><span class="line">  - containerPort: 30072</span><br><span class="line">    hostPort: 30072</span><br><span class="line">  - containerPort: 30073</span><br><span class="line">    hostPort: 30073</span><br><span class="line">  - containerPort: 30074</span><br><span class="line">    hostPort: 30074</span><br><span class="line">  - containerPort: 30075</span><br><span class="line">    hostPort: 30075</span><br></pre></td></tr></table></figure>
+
+<p>因為kind是將kubernetes run在一個docker中，所以必須設定其extraPortMappings，目的是讓host端可以透過port去access kubernetes內部服務。</p>
+<p>接著新增一個Cluster</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind create cluster --name &lt;name&gt; --config &lt;cluster-config.yaml&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="刪除Cluster"><a href="#刪除Cluster" class="headerlink" title="刪除Cluster"></a>刪除Cluster</h2><p>刪除目標cluster</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind delete cluster --name &lt;name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>刪除全部clusters</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kind delete clusters --all</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -244,8 +266,8 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/kubectl/" rel="tag"># kubectl</a>
               <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+              <a href="/tags/kubectl/" rel="tag"># kubectl</a>
               <a href="/tags/kind/" rel="tag"># kind</a>
           </div>
 
