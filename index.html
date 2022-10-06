@@ -201,7 +201,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-10-06 18:33:27 / Modified: 19:21:42" itemprop="dateCreated datePublished" datetime="2022-10-06T18:33:27+08:00">2022-10-06</time>
+      <time title="Created: 2022-10-06 18:33:27 / Modified: 19:27:58" itemprop="dateCreated datePublished" datetime="2022-10-06T18:33:27+08:00">2022-10-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -238,92 +238,14 @@
 <li>serf: Server與Server彼此溝通之介面</li>
 </ul>
 <p>本次測試將Server與Client端在同一台Host上測試。官方不建議將Server與Client配置在同一台機器上用於生產環境中。</p>
-<hr>
-<h2 id="環境準備"><a href="#環境準備" class="headerlink" title="環境準備"></a><strong>環境準備</strong></h2><ul>
-<li>Windows Server 2019</li>
-<li>nomad.exe</li>
-</ul>
-<hr>
-<h2 id="配置及啟動Nomad"><a href="#配置及啟動Nomad" class="headerlink" title="配置及啟動Nomad"></a><strong>配置及啟動Nomad</strong></h2><p>Nomad啟動與Vault相同，以Binary執行方式啟動。</p>
-<ul>
-<li>Windows環境: 可以透過sc.exe或nssm將Nomad安裝成Windows Service。</li>
-<li>Linux環境: 可以透過systemd托管成服務。</li>
-</ul>
-<h3 id="Server-Config"><a href="#Server-Config" class="headerlink" title="Server Config"></a>Server Config</h3><p>配置參數可參考官網: <a target="_blank" rel="noopener" href="https://www.nomadproject.io/docs/configuration#general-parameters">https://www.nomadproject.io/docs/configuration#general-parameters</a></p>
-<p>生成一個server.hcl文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">datacenter = &quot;&lt;dc_name&gt;&quot;</span><br><span class="line">name = &quot;&lt;server-name&gt;&quot;</span><br><span class="line">data_dir = &quot;C:\\nomad\\server\\data&quot;</span><br><span class="line">bind_addr = &quot;&lt;host ip&gt;&quot;</span><br><span class="line">disable_update_check = true</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    enabled = true</span><br><span class="line">    bootstrap_expect = 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">advertise &#123;</span><br><span class="line">    http = &quot;&lt;dns name&gt;:8100&quot;</span><br><span class="line">    rpc  = &quot;&lt;dns name&gt;:8101&quot;</span><br><span class="line">    serf = &quot;&lt;dns name&gt;:8102&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ports &#123;</span><br><span class="line">    http = 8100</span><br><span class="line">    rpc  = 8101</span><br><span class="line">    serf = 8102</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">telemetry &#123;</span><br><span class="line">  collection_interval = &quot;1s&quot;</span><br><span class="line">  disable_hostname = true</span><br><span class="line">  prometheus_metrics = true</span><br><span class="line">  publish_allocation_metrics = true</span><br><span class="line">  publish_node_metrics = true</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">tls &#123;</span><br><span class="line">    http = true</span><br><span class="line">    rpc = true</span><br><span class="line">    </span><br><span class="line">    ca_file = &quot;&lt;path\\to\\ca_file&gt;&quot;</span><br><span class="line">    cert_file = &quot;&lt;path\\to\\cert_file&gt;&quot;</span><br><span class="line">    key_file = &quot;path\\to\\key_file&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">log_level = &quot;DEBUG&quot;</span><br><span class="line">log_file = &quot;C:\\nomad\\server\\logs\\nomad.log&quot;</span><br><span class="line">log_rotate_duration = &quot;24h&quot;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>datacenter: 設定datacenter名稱，預設為”dc1”。</li>
-<li>name: 設定nomad server名稱，預設為”hostname”。</li>
-<li>data_dir: 用來儲存nomad放資料的地方。</li>
-<li>bind_addr: 提供外部連線之ip，例如: Web UI、HTTP等，預設為”0.0.0.0”<br>(設定127.0.0.1會出現fail，原因此IP亦是提供其他nomad server溝通作為HA使用)</li>
-<li>server<ul>
-<li>enabled &#x3D; true  (代表啟動server mod)</li>
-<li>bootstrap_expect : N (預計要啟動幾個Server，所為三台Nomad server做HA，則設定為3，HA的做法要參考官網或其他)</li>
-</ul>
-</li>
-<li>ports<ul>
-<li>可分別指定http, rpc, serf的port</li>
-</ul>
-</li>
-<li>advertise (這邊沒有設定)<ul>
-<li>可分別指定http, rpc, serf的ip: port</li>
-</ul>
-</li>
-<li>log_level : 預設是INFO。有”TRACE”、”DEBUG”、”INFO”、”WARN”、”ERR”可以選擇。</li>
-<li>log_file : <path to log file> (檔名會是nomad-{timestamp}.log)</li>
-<li>log_rotate_duration: log紀錄多久時間rotate一次。</li>
-</ul>
-<p>以command line方式nomad server</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nomad.exe agent -config=&quot;C:\nomad\conf\server.hcl&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Client-Config"><a href="#Client-Config" class="headerlink" title="Client Config"></a>Client Config</h3><p>生成一個client.hcl文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">datacenter = &quot;&lt;dc_name&gt;&quot;</span><br><span class="line">name = &quot;&lt;server-name&gt;&quot;</span><br><span class="line">data_dir = &quot;C:\\nomad\\client\\data&quot;</span><br><span class="line">bind_addr = &quot;&lt;host ip&gt;&quot;</span><br><span class="line"></span><br><span class="line">client &#123;</span><br><span class="line">    enabled = true</span><br><span class="line">    servers = [&quot;&lt;dns name&gt;:8101&quot;]</span><br><span class="line"></span><br><span class="line">    reserved &#123;</span><br><span class="line">        cpu = 3000</span><br><span class="line">        memory = 5120</span><br><span class="line">        disk = 10240</span><br><span class="line">        reserved_ports = &quot;22,80&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">advertise &#123;</span><br><span class="line">    http = &quot;&lt;dns name&gt;:8103&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ports &#123;</span><br><span class="line">    http = 8103</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">plugin &quot;raw_exec&quot; &#123;</span><br><span class="line">    config &#123;</span><br><span class="line">        enabled = true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">telemetry &#123;</span><br><span class="line">  collection_interval = &quot;1s&quot;</span><br><span class="line">  disable_hostname = true</span><br><span class="line">  prometheus_metrics = true</span><br><span class="line">  publish_allocation_metrics = true</span><br><span class="line">  publish_node_metrics = true</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">tls &#123;</span><br><span class="line">    http = true</span><br><span class="line">    rpc = true</span><br><span class="line">    </span><br><span class="line">    ca_file = &quot;&lt;path\\to\\ca_file&gt;&quot;</span><br><span class="line">    cert_file = &quot;&lt;path\\to\\cert_file&gt;&quot;</span><br><span class="line">    key_file = &quot;path\\to\\key_file&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">log_level = &quot;DEBUG&quot;</span><br><span class="line">log_file = &quot;C:\\nomad\\client\\logs\\nomad_client.log&quot;</span><br><span class="line">log_rotate_duration = &quot;24h&quot;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>client<ul>
-<li>servers : 輸入<server ip>:&lt;server的rpc port&gt; (對應於server端的rpc port)</li>
-</ul>
-</li>
-<li>advertise<ul>
-<li>這邊是指client的對外公告url+ip 跟server的advertise不同</li>
-</ul>
-</li>
-<li>ports<ul>
-<li>這邊是指client的指定port，不指定則會是預設值4646</li>
-</ul>
-</li>
-<li>plugin “raw_exec”<ul>
-<li>似乎只有raw_exec要在client.hcl中註明載入</li>
-<li>官方的exec (Isolated Fork&#x2F;Exec): 只適用於Linux (可能是cgroup原故吧)</li>
-</ul>
-</li>
-</ul>
-<p>以command line方式nomad client</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nomad.exe agent -config=&quot;C:\nomad\conf\client.hcl&quot;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="將-nomad-server-及-client-安裝成-Windows-Service"><a href="#將-nomad-server-及-client-安裝成-Windows-Service" class="headerlink" title="將 nomad server 及 client 安裝成 Windows Service"></a><strong>將 nomad server 及 client 安裝成 Windows Service</strong></h2><p>執行cmd (run as Administrator)，執行sc.exe，如下</p>
-<p><strong>install nomad server</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.exe create &quot;nomad-server&quot; binPath=&quot;C:\nomad\nomad.exe agent -config=C:\nomad\server\conf\server.hcl&quot; start=auto</span><br></pre></td></tr></table></figure>
-
-<p><strong>start nomad server</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.exe start &quot;nomad-server&quot;</span><br></pre></td></tr></table></figure>
-
-<p><strong>install nomad client</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.exe create &quot;nomad-client&quot; binPath=&quot;C:\nomad\nomad.exe agent -config=C:\nomad\client\conf\client.hcl&quot; start=auto</span><br></pre></td></tr></table></figure>
-
-<p><strong>start nomad client</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.exe start &quot;nomad-client&quot;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="將服務托管成一個job"><a href="#將服務托管成一個job" class="headerlink" title="將服務托管成一個job"></a><strong>將服務托管成一個job</strong></h2><hr>
-<h2 id="刪除指定job"><a href="#刪除指定job" class="headerlink" title="刪除指定job"></a><strong>刪除指定job</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nomad.exe job stop -purge &lt;job name&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="其他注意事項"><a href="#其他注意事項" class="headerlink" title="其他注意事項"></a><strong>其他注意事項</strong></h2><h3 id="Service-Mesh"><a href="#Service-Mesh" class="headerlink" title="Service Mesh"></a>Service Mesh</h3><p>nomad service mesh 必須以consul做為後端整合。<br>但僅適用於Linux環境。<br>Windows或macOS不適用。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/06/Hashicorp-nomad/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
