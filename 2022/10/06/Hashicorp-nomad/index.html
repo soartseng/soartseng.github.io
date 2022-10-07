@@ -29,14 +29,14 @@
 <meta property="og:site_name" content="Soar&#39;s Notes">
 <meta property="og:description" content="Nomad Architecture在工作中，因為早期因素及特殊需求，因此部分服務離不開Windows作業系統。又先前透過pm2托管平台上的各種服務，其服務包含了Python, Java及Nodejs，但托管起來除了Nodejs之外，Python偶不時會出狀況。 Nomad是Hashicorp公司出品，先前使用過同家公司出品的Vault作為敏感性資訊的存放，體驗極佳，團隊決定嘗試把pm2上的服務轉">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://www.soartseng.com/Hashicorp-nomad/noman-overview.PNG">
+<meta property="og:image" content="https://www.soartseng.com/_posts/Hashicorp-nomad/noman-overview.PNG">
 <meta property="article:published_time" content="2022-10-06T10:33:27.000Z">
-<meta property="article:modified_time" content="2022-10-07T07:06:12.275Z">
+<meta property="article:modified_time" content="2022-10-07T07:10:34.344Z">
 <meta property="article:author" content="Soar Tseng">
 <meta property="article:tag" content="nomad">
 <meta property="article:tag" content="Hashicorp">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.soartseng.com/Hashicorp-nomad/noman-overview.PNG">
+<meta name="twitter:image" content="https://www.soartseng.com/_posts/Hashicorp-nomad/noman-overview.PNG">
 
 
 <link rel="canonical" href="https://www.soartseng.com/2022/10/06/Hashicorp-nomad/">
@@ -215,7 +215,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-10-07 15:06:12" itemprop="dateModified" datetime="2022-10-07T15:06:12+08:00">2022-10-07</time>
+      <time title="Modified: 2022-10-07 15:10:34" itemprop="dateModified" datetime="2022-10-07T15:10:34+08:00">2022-10-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -243,7 +243,7 @@
     <div class="post-body" itemprop="articleBody">
         <h2 id="Nomad-Architecture"><a href="#Nomad-Architecture" class="headerlink" title="Nomad Architecture"></a>Nomad Architecture</h2><p>在工作中，因為早期因素及特殊需求，因此部分服務離不開Windows作業系統。<br>又先前透過pm2托管平台上的各種服務，其服務包含了Python, Java及Nodejs，但托管起來除了Nodejs之外，Python偶不時會出狀況。</p>
 <p>Nomad是Hashicorp公司出品，先前使用過同家公司出品的Vault作為敏感性資訊的存放，體驗極佳，團隊決定嘗試把pm2上的服務轉移至Nomad上，並且測試其穩定性。</p>
-<p>首先，先簡單介紹Nomad架構<br><img src="/Hashicorp-nomad/noman-overview.PNG" alt="img"></p>
+<p>首先，先簡單介紹Nomad架構<br><img src="/../_posts/Hashicorp-nomad/noman-overview.PNG" alt="img"></p>
 <p>Nomad架構包含了Server端及Client端，很類似Kubernetens的Control Plane及Node的主從架構。</p>
 <p>Nomad配置時，會需要三個port，分別是http、rpc、serf，功能如下:</p>
 <ul>
