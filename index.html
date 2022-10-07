@@ -199,9 +199,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-10-06 18:33:27 / Modified: 19:27:58" itemprop="dateCreated datePublished" datetime="2022-10-06T18:33:27+08:00">2022-10-06</time>
+      <time title="Created: 2022-10-06 18:33:27" itemprop="dateCreated datePublished" datetime="2022-10-06T18:33:27+08:00">2022-10-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-10-07 15:06:12" itemprop="dateModified" datetime="2022-10-07T15:06:12+08:00">2022-10-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -229,7 +235,7 @@
     <div class="post-body" itemprop="articleBody">
           <h2 id="Nomad-Architecture"><a href="#Nomad-Architecture" class="headerlink" title="Nomad Architecture"></a>Nomad Architecture</h2><p>在工作中，因為早期因素及特殊需求，因此部分服務離不開Windows作業系統。<br>又先前透過pm2托管平台上的各種服務，其服務包含了Python, Java及Nodejs，但托管起來除了Nodejs之外，Python偶不時會出狀況。</p>
 <p>Nomad是Hashicorp公司出品，先前使用過同家公司出品的Vault作為敏感性資訊的存放，體驗極佳，團隊決定嘗試把pm2上的服務轉移至Nomad上，並且測試其穩定性。</p>
-<p>首先，先簡單介紹Nomad架構<br>&lt;補假構圖&gt;</p>
+<p>首先，先簡單介紹Nomad架構<br><img src="/Hashicorp-nomad/noman-overview.PNG" alt="img"></p>
 <p>Nomad架構包含了Server端及Client端，很類似Kubernetens的Control Plane及Node的主從架構。</p>
 <p>Nomad配置時，會需要三個port，分別是http、rpc、serf，功能如下:</p>
 <ul>
